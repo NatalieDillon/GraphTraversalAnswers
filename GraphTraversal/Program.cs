@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
-using GraphExercises.Classes;
+using GraphTraversal.Classes;
 
-namespace GraphExercises
+namespace GraphTraversal
 {
     internal class Program
     {
@@ -9,13 +9,10 @@ namespace GraphExercises
         {
             Console.WriteLine("Hello, Graph!");
 
-            // Test matrix implementation
-            MatrixGraph matrix = new();
-            TestGraph(matrix);
             Console.WriteLine();
 
             // Test adjacency list implementation
-            AdjacencyListGraph adjList = new();
+            Graph adjList = new();
             TestGraph(adjList);
 
         }
@@ -36,10 +33,10 @@ namespace GraphExercises
             graph.AddEdge("E", "F", 8);
 
             Console.WriteLine(graph.Display());
-            Console.WriteLine(graph.IsConnected("D", "B"));
-            Console.WriteLine(graph.IsConnected("C", "E"));
-            Debug.Assert(graph.IsConnected("D", "B"));
-            Debug.Assert(!graph.IsConnected("C", "E"));
+            Console.WriteLine(graph.HasEdge("D", "B"));
+            Console.WriteLine(graph.HasEdge("C", "E"));
+            Debug.Assert(graph.HasEdge("D", "B"));
+            Debug.Assert(!graph.HasEdge("C", "E"));
 
             Console.WriteLine($"Neighbours of D: {string.Join(",", graph.Neighbours("D"))}");
         }

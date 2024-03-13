@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GraphExercises.Classes\GraphExercises.Classes.csproj" />
+    <ProjectReference Include="..\GraphTraversal.Classes\GraphTraversal.Classes.csproj" />
   </ItemGroup>
 
 </Project>
