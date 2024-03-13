@@ -8,10 +8,10 @@ namespace GraphTraversal.Classes
 {
     public class Graph : IGraph
     {
-        // Uses a dictionary of dictionaries
+        // Represented as an adjacency list - dictionary of dictionaries
         private readonly Dictionary<string, Dictionary<string, double>> _graph = new();
 
-        public virtual void AddEdge(string startVertex, string endVertex, double weight)
+        public void AddEdge(string startVertex, string endVertex, double weight)
         {
             if (!_graph.ContainsKey(startVertex))
             {

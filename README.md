@@ -1,11 +1,5 @@
-## Graph exercises
+## Graph traversal exercises
 
-Represent a graph using both an adjacency matrix and an adjacency list</br>
-It has been assumed for the moment that the vertices will be a string</br>
-
-1. Implement IGraph using an adjacency matrix. A 2-Dimensional array will represent the edges. A list of strings will represent the vertices.</br>
-2. Implement IGraph using an adjacency list. Use a dictionary of dictionaries.</br>
-3. Test your code, there is some example test code in Program.cs. Add to this or create your own unit tests</br>
-
-Extension:
-Now create a text file with some example graph data (you might wish to look up some real data such as the travel times between different underground stations) and add code to upload this data into a graph and test it</br>
+1. Add a depth first search using recursion to the adjacency list graph. To verify that it works use test data from the graph in GraphExercises_2.pptx. It will probably be fastest to use a HashSet (like a dictionary but only with keys) for the list of visited vertices. However if you want to be sure that the visit order is preserved then you will need to use a List as well.
+2. Write another method for depth first search but use a stack
+3. Write a method for breadth first search. It will be the same as the depth first search with a stack but it will use a queue.
