@@ -42,16 +42,17 @@ namespace GraphTraversal.Classes
             string currentVertex = startVertex;
             queue.Enqueue(currentVertex);
             visited.Add(currentVertex);
+            path.Add(currentVertex);
             while (queue.Count > 0)
             {
                 currentVertex = queue.Dequeue();
-                path.Add(currentVertex);
                 foreach (string neighbour in _graph[currentVertex].Keys)
                 {
                     if (!visited.Contains(neighbour))
                     {
                         queue.Enqueue(neighbour);
                         visited.Add(neighbour);
+                        path.Add(neighbour);
                     }
                 }
             }
