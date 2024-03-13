@@ -12,7 +12,7 @@
         string Display();
 
         // Adds an edge to the graph       
-        void AddEdge(string startIndex, string endIndex, double weight);       
+        void AddEdge(string startIndex, string endIndex, double weight=1);       
 
         List<string> BreadthFirstSearch(string startVertex);
 
