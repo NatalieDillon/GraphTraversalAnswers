@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using GraphTraversal.Classes;
 
 namespace GraphTraversal
@@ -10,35 +11,46 @@ namespace GraphTraversal
             Console.WriteLine("Hello, Graph!");
 
             Console.WriteLine();
-
-            // Test adjacency list implementation
-            Graph adjList = new();
-            TestGraph(adjList);
+            TestGraph();
 
         }
 
-        private static void TestGraph(IGraph graph)
+        private static void TestGraph()
         {
-            graph.AddEdge("A", "B", 2);
-            graph.AddEdge("A", "C", 9);
-            graph.AddEdge("A", "D", 3);
-            graph.AddEdge("B", "E", 2);
-            graph.AddEdge("C", "A", 9);
-            graph.AddEdge("D", "A", 3);
-
-            graph.AddEdge("D", "B", 6);
-            graph.AddEdge("D", "C", 7);
-            graph.AddEdge("D", "E", 1);
-            graph.AddEdge("D", "F", 5);
-            graph.AddEdge("E", "F", 8);
+            Graph graph = new();
+            graph.AddEdge("A", "C");
+            graph.AddEdge("A", "E");
+            graph.AddEdge("B", "F");
+            graph.AddEdge("C", "A");
+            graph.AddEdge("C", "D");
+            graph.AddEdge("C", "G");
+            graph.AddEdge("D", "C");
+            graph.AddEdge("D", "E");
+            graph.AddEdge("E", "D");
+            graph.AddEdge("E", "H");
+            graph.AddEdge("F", "B");
+            graph.AddEdge("F", "G");
+            graph.AddEdge("G", "C");
+            graph.AddEdge("G", "F");
+            graph.AddEdge("H", "E");
+            graph.AddEdge("H", "I");
+            graph.AddEdge("I", "H");
 
             Console.WriteLine(graph.Display());
-            Console.WriteLine(graph.HasEdge("D", "B"));
-            Console.WriteLine(graph.HasEdge("C", "E"));
-            Debug.Assert(graph.HasEdge("D", "B"));
-            Debug.Assert(!graph.HasEdge("C", "E"));
 
-            Console.WriteLine($"Neighbours of D: {string.Join(",", graph.Neighbours("D"))}");
+            Console.Write("From which vertex would you like to traverse the graph? : ");
+            string vertex = Console.ReadLine() ?? string.Empty;
+            if (!graph.ContainsVertex(vertex))
+            {
+                Console.WriteLine("Sorry that vertex does not exist");
+            }
+            else
+            {
+                Console.WriteLine($"BFS: [{string.Join(",", graph.BreadthFirstSearch(vertex))}]");
+                Console.WriteLine($"DFS: [{string.Join(",", graph.DepthFirstSearch(vertex))}]");
+                Console.WriteLine($"DFS (iterative): [{string.Join(",", graph.DepthFirstSearchIterative(vertex))}]");
+            }
+
         }
     }
 }

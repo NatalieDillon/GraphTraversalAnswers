@@ -11,6 +11,11 @@ namespace GraphTraversal.Classes
         // Represented as an adjacency list - dictionary of dictionaries
         private readonly Dictionary<string, Dictionary<string, double>> _graph = new();
 
+        public bool ContainsVertex(string vertex)
+        {
+            return _graph.ContainsKey(vertex);
+        }
+
         public void AddEdge(string startVertex, string endVertex, double weight=1)
         {
             if (!_graph.ContainsKey(startVertex))
