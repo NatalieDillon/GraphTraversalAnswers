@@ -26,6 +26,7 @@ namespace GraphTraversal
             graph.AddEdge("C", "G");
             graph.AddEdge("D", "C");
             graph.AddEdge("D", "E");
+            graph.AddEdge("E", "A");
             graph.AddEdge("E", "D");
             graph.AddEdge("E", "H");
             graph.AddEdge("F", "B");
