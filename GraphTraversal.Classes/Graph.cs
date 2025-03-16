@@ -16,29 +16,18 @@ namespace GraphTraversal.Classes
             return _graph.ContainsKey(vertex);
         }
 
-        public void AddEdge(string startVertex, string endVertex, double weight=1)
-        {
-            if (!_graph.ContainsKey(startVertex))
-            {
-                _graph.Add(startVertex, new());
-            }
-            var adjList = _graph[startVertex];
-            if (!adjList.ContainsKey(endVertex))
-            {
-                adjList.Add(endVertex, weight);
+		public void AddEdge(string startVertex, string endVertex, double weight = 1)
+		{
+			_graph.TryAdd(startVertex, []);
+			_graph.TryAdd(endVertex, []);
+			_graph[startVertex].TryAdd(endVertex, weight);
+		}
 
-            }
-            if (!_graph.ContainsKey(endVertex))
-            {
-                _graph.Add(endVertex, new());
-            }
-        }
-
-        public List<string> BreadthFirstSearch(string startVertex)
+		public List<string> BreadthFirstSearch(string startVertex)
         {
-            HashSet<string> visited = new();
-            List<string> path = new();
-            Queue<string> queue = new();
+            HashSet<string> visited = [];
+            List<string> path = [];
+            Queue<string> queue = [];
             string currentVertex = startVertex;
             queue.Enqueue(currentVertex);
             visited.Add(currentVertex);
@@ -61,8 +50,8 @@ namespace GraphTraversal.Classes
 
         public List<string> DepthFirstSearch(string startVertex)
         {
-            HashSet<string> visited = new();
-            List<string> path = new();
+            HashSet<string> visited = [];
+            List<string> path = [];
             DepthFirstSearch(visited, path, startVertex);
             return path;
         }
@@ -82,9 +71,9 @@ namespace GraphTraversal.Classes
 
         public List<string> DepthFirstSearchIterative(string startVertex)
         {
-            HashSet<string> visited = new();
-            Stack<string> stack = new();
-            List<string> path = new();
+            HashSet<string> visited = [];
+            Stack<string> stack = [];
+            List<string> path = [];
             string currentVertex = startVertex;
             stack.Push(currentVertex);
             while (stack.Count > 0)
@@ -125,26 +114,24 @@ namespace GraphTraversal.Classes
             return sb.ToString();
         }
 
-        public bool HasEdge(string startVertex, string endVertex)
-        {
-            if (_graph.ContainsKey(startVertex))
-            {
-                var values = _graph[startVertex];
-                return values.Keys.FirstOrDefault(k => k.Equals(endVertex)) != null;
-            }
-            return false;
-        }
+		public bool HasEdge(string startVertex, string endVertex)
+		{
+			bool hasEdge = false;
+			if (_graph.TryGetValue(startVertex, out var adjacencyList))
+			{
+				hasEdge = adjacencyList.ContainsKey(endVertex);
+			}
+			return hasEdge;
+		}
 
-        public List<string> Neighbours(string vertex)
-        {
-            List<string> neighbours = new();
-            if (_graph.ContainsKey(vertex))
-            {
-                neighbours.AddRange(_graph[vertex].Keys);
-            }
-            return neighbours;
-        }
-
-       
-    }
+		public List<string> Neighbours(string vertex)
+		{
+			List<string> neighbours = [];
+			if (_graph.TryGetValue(vertex, out var adjacencyList))
+			{
+				neighbours.AddRange(adjacencyList.Keys);
+			}
+			return neighbours;
+		}
+	}
 }
